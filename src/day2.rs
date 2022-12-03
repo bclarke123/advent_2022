@@ -39,7 +39,6 @@ where
     F: Fn(&str, &str) -> i32,
 {
     let lines = INPUT.split('\n').map(|x| x.trim()).collect::<Vec<&str>>();
-
     let mut score = 0;
 
     for line in &lines {
@@ -50,7 +49,7 @@ where
         score += play_score;
     }
 
-    println!("{}", score);
+    println!("Total Rock Paper Scissors score: {}", score);
 }
 
 pub fn part1() {
@@ -58,7 +57,6 @@ pub fn part1() {
         let your_hand = play_for_str(your_guess);
         let my_hand = play_for_str(my_guess);
         let bonus = bonus(your_hand, my_hand);
-
         my_hand + bonus
     });
 }
@@ -69,5 +67,5 @@ pub fn part2() {
         let my_hand = guess_for_play(your_hand, my_guess);
         let bonus = bonus(your_hand, my_hand);
         my_hand + bonus
-    })
+    });
 }
