@@ -8,6 +8,23 @@ fn char_val(c: char) -> u32 {
     }
 }
 
+fn shared_char(lines: Vec<&str>) -> u32 {
+    let ch1 = lines[0].chars();
+    let others = &lines[1..];
+
+    'chars: for c in ch1 {
+        for line in others {
+            if !line.contains(c) {
+                continue 'chars;
+            }
+        }
+
+        return char_val(c);
+    }
+
+    0
+}
+
 pub fn part1() {
     let lines = INPUT
         .split('\n')
@@ -17,15 +34,8 @@ pub fn part1() {
     let mut result: u32 = 0;
 
     for line in lines {
-        let ch1 = line.0.chars();
-
-        for c in ch1 {
-            if line.1.contains(c) {
-                let value: u32 = char_val(c);
-                result += value;
-                break;
-            }
-        }
+        let arr = vec![line.0, line.1];
+        result += shared_char(arr);
     }
 
     println!("The sum of values is {}", result);
@@ -38,14 +48,8 @@ pub fn part2() {
     let mut result: u32 = 0;
 
     for team in teams {
-        let ch1 = team[0].chars();
-        for c in ch1 {
-            if team[1].contains(c) && team[2].contains(c) {
-                let value: u32 = char_val(c);
-                result += value;
-                break;
-            }
-        }
+        let arr = team.to_vec();
+        result += shared_char(arr);
     }
 
     println!("The team badge is {}", result);
