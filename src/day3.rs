@@ -2,9 +2,10 @@ const INPUT: &str = include_str!("input_day3.txt");
 
 fn char_val(c: char) -> u32 {
     let c_val: u32 = c.into();
-    match c_val {
-        x if x > 64 && x < 91 => x - 38,
-        x => x - 96,
+    if c_val > 64 && c_val < 91 {
+        c_val - 38
+    } else {
+        c_val - 96
     }
 }
 
