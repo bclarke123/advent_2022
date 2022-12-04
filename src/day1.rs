@@ -1,7 +1,7 @@
 const INPUT: &str = include_str!("input_day1.txt");
 
 fn get_carry_amounts(buf: &mut Vec<usize>) {
-    let lines = INPUT.split('\n').map(|x| x.trim()).collect::<Vec<&str>>();
+    let lines = INPUT.lines().collect::<Vec<&str>>();
 
     buf.truncate(0);
     buf.push(0);

@@ -38,7 +38,7 @@ fn tally<F>(cb: F)
 where
     F: Fn(&str, &str) -> i32,
 {
-    let lines = INPUT.split('\n').map(|x| x.trim()).collect::<Vec<&str>>();
+    let lines = INPUT.lines().collect::<Vec<&str>>();
     let mut score = 0;
 
     for line in &lines {

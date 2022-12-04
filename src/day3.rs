@@ -27,8 +27,8 @@ fn shared_char(lines: Vec<&str>) -> u32 {
 
 pub fn part1() {
     let lines = INPUT
-        .split('\n')
-        .map(|x| x.trim().split_at(x.len() / 2))
+        .lines()
+        .map(|x| x.split_at(x.len() / 2))
         .collect::<Vec<(&str, &str)>>();
 
     let mut result: u32 = 0;
@@ -42,7 +42,7 @@ pub fn part1() {
 }
 
 pub fn part2() {
-    let lines = INPUT.split('\n').map(|x| x.trim()).collect::<Vec<&str>>();
+    let lines = INPUT.lines().collect::<Vec<&str>>();
     let teams = lines[..].chunks(3);
 
     let mut result: u32 = 0;
