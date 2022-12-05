@@ -9,7 +9,7 @@ fn char_val(c: char) -> u32 {
     }
 }
 
-fn shared_char(lines: Vec<&str>) -> u32 {
+fn shared_char(lines: &[&str]) -> u32 {
     let ch1 = lines[0].chars();
     let others = &lines[1..];
 
@@ -27,19 +27,13 @@ fn shared_char(lines: Vec<&str>) -> u32 {
 }
 
 fn do_part1(input: &str) -> u32 {
-    let lines = input
+    input
         .lines()
-        .map(|x| x.split_at(x.len() / 2))
-        .collect::<Vec<(&str, &str)>>();
-
-    let mut result: u32 = 0;
-
-    for line in lines {
-        let arr = vec![line.0, line.1];
-        result += shared_char(arr);
-    }
-
-    result
+        .map(|x| {
+            let t = x.split_at(x.len() / 2);
+            shared_char(&[t.0, t.1])
+        })
+        .sum()
 }
 
 pub fn part1() {
@@ -48,17 +42,13 @@ pub fn part1() {
 }
 
 fn do_part2(input: &str) -> u32 {
-    let lines = input.lines().collect::<Vec<&str>>();
-    let teams = lines[..].chunks(3);
-
-    let mut result: u32 = 0;
-
-    for team in teams {
-        let arr = team.to_vec();
-        result += shared_char(arr);
-    }
-
-    result
+    input
+        .lines()
+        .collect::<Vec<_>>()
+        .as_slice()
+        .chunks(3)
+        .map(shared_char)
+        .sum()
 }
 
 pub fn part2() {
