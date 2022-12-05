@@ -34,11 +34,11 @@ fn bonus(your_hand: i32, my_hand: i32) -> i32 {
     }
 }
 
-fn tally<F>(cb: F)
+fn tally<F>(input: &str, cb: F) -> i32
 where
     F: Fn(&str, &str) -> i32,
 {
-    let lines = INPUT.lines().collect::<Vec<&str>>();
+    let lines = input.lines().collect::<Vec<&str>>();
     let mut score = 0;
 
     for line in &lines {
@@ -49,23 +49,47 @@ where
         score += play_score;
     }
 
-    println!("Total Rock Paper Scissors score: {}", score);
+    score
 }
 
-pub fn part1() {
-    tally(|your_guess, my_guess| {
+fn do_part1(input: &str) -> i32 {
+    tally(input, |your_guess, my_guess| {
         let your_hand = play_for_str(your_guess);
         let my_hand = play_for_str(my_guess);
         let bonus = bonus(your_hand, my_hand);
         my_hand + bonus
-    });
+    })
 }
 
-pub fn part2() {
-    tally(|your_guess, my_guess| {
+pub fn part1() {
+    let score = do_part1(INPUT);
+    println!("Total P1 Rock Paper Scissors score: {}", score);
+}
+
+fn do_part2(input: &str) -> i32 {
+    tally(input, |your_guess, my_guess| {
         let your_hand = play_for_str(your_guess);
         let my_hand = guess_for_play(your_hand, my_guess);
         let bonus = bonus(your_hand, my_hand);
         my_hand + bonus
-    });
+    })
+}
+
+pub fn part2() {
+    let score = do_part2(INPUT);
+    println!("Total P2 Rock Paper Scissors score: {}", score);
+}
+
+#[test]
+fn test_part1() {
+    let test_input: &str = include_str!("input_day2_sample.txt");
+    let score = do_part1(test_input);
+    assert!(score == 15);
+}
+
+#[test]
+fn test_part2() {
+    let test_input: &str = include_str!("input_day2_sample.txt");
+    let score = do_part2(test_input);
+    assert!(score == 12);
 }

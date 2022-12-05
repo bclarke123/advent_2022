@@ -26,8 +26,8 @@ fn shared_char(lines: Vec<&str>) -> u32 {
     0
 }
 
-pub fn part1() {
-    let lines = INPUT
+fn do_part1(input: &str) -> u32 {
+    let lines = input
         .lines()
         .map(|x| x.split_at(x.len() / 2))
         .collect::<Vec<(&str, &str)>>();
@@ -39,11 +39,16 @@ pub fn part1() {
         result += shared_char(arr);
     }
 
+    result
+}
+
+pub fn part1() {
+    let result = do_part1(INPUT);
     println!("The sum of values is {}", result);
 }
 
-pub fn part2() {
-    let lines = INPUT.lines().collect::<Vec<&str>>();
+fn do_part2(input: &str) -> u32 {
+    let lines = input.lines().collect::<Vec<&str>>();
     let teams = lines[..].chunks(3);
 
     let mut result: u32 = 0;
@@ -53,5 +58,24 @@ pub fn part2() {
         result += shared_char(arr);
     }
 
+    result
+}
+
+pub fn part2() {
+    let result = do_part2(INPUT);
     println!("The team badge is {}", result);
+}
+
+#[test]
+fn test_part1() {
+    let test_input: &str = include_str!("input_day3_sample.txt");
+    let result = do_part1(test_input);
+    assert!(result == 157);
+}
+
+#[test]
+fn test_part2() {
+    let test_input: &str = include_str!("input_day3_sample.txt");
+    let result = do_part2(test_input);
+    assert!(result == 70);
 }
