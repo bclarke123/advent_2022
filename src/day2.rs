@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("input_day2.txt");
+const INPUT: &str = include_str!("input/input_day2.txt");
 
 fn play_for_str(s: &str) -> i32 {
     match s.chars().next().unwrap() {
@@ -82,14 +82,14 @@ pub fn part2() {
 
 #[test]
 fn test_part1() {
-    let test_input: &str = include_str!("input_day2_sample.txt");
+    let test_input: &str = include_str!("input/input_day2_sample.txt");
     let score = do_part1(test_input);
     assert!(score == 15);
 }
 
 #[test]
 fn test_part2() {
-    let test_input: &str = include_str!("input_day2_sample.txt");
+    let test_input: &str = include_str!("input/input_day2_sample.txt");
     let score = do_part2(test_input);
     assert!(score == 12);
 }

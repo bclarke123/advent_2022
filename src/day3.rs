@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("input_day3.txt");
+const INPUT: &str = include_str!("input/input_day3.txt");
 
 fn char_val(c: char) -> u32 {
     let c_val: u32 = c.into();
@@ -58,14 +58,14 @@ pub fn part2() {
 
 #[test]
 fn test_part1() {
-    let test_input: &str = include_str!("input_day3_sample.txt");
+    let test_input: &str = include_str!("input/input_day3_sample.txt");
     let result = do_part1(test_input);
     assert!(result == 157);
 }
 
 #[test]
 fn test_part2() {
-    let test_input: &str = include_str!("input_day3_sample.txt");
+    let test_input: &str = include_str!("input/input_day3_sample.txt");
     let result = do_part2(test_input);
     assert!(result == 70);
 }

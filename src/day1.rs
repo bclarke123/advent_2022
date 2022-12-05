@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("input_day1.txt");
+const INPUT: &str = include_str!("input/input_day1.txt");
 
 fn get_carry_amounts(input: &str, buf: &mut Vec<usize>) {
     let lines = input.lines().collect::<Vec<&str>>();
@@ -43,14 +43,14 @@ pub fn part2() {
 
 #[test]
 fn test_part1() {
-    let test_input: &str = include_str!("input_day1_sample.txt");
+    let test_input: &str = include_str!("input/input_day1_sample.txt");
     let max = tally(test_input, 1);
     assert!(max == 24000);
 }
 
 #[test]
 fn test_part2() {
-    let test_input: &str = include_str!("input_day1_sample.txt");
+    let test_input: &str = include_str!("input/input_day1_sample.txt");
     let max = tally(test_input, 3);
     assert!(max == 45000);
 }

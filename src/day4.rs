@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("input_day4.txt");
+const INPUT: &str = include_str!("input/input_day4.txt");
 
 fn within(p: u32, a: &[u32]) -> bool {
     p >= a[0] && p <= a[1]
@@ -43,14 +43,14 @@ pub fn part2() {
 
 #[test]
 fn test_part1() {
-    let test_input: &str = include_str!("input_day4_sample.txt");
+    let test_input: &str = include_str!("input/input_day4_sample.txt");
     let areas = test_areas(test_input, contained);
     assert!(areas == 2);
 }
 
 #[test]
 fn test_part2() {
-    let test_input: &str = include_str!("input_day4_sample.txt");
+    let test_input: &str = include_str!("input/input_day4_sample.txt");
     let areas = test_areas(test_input, overlap);
     assert!(areas == 4);
 }
