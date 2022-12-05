@@ -1,15 +1,15 @@
 const INPUT: &str = include_str!("input/input_day5.txt");
 
-fn parse_start<'a>(start: &Vec<&'a str>) -> Vec<Vec<&'a str>> {
+fn parse_start<'a>(start: &[&'a str]) -> Vec<Vec<&'a str>> {
     let cols = start[0].len() / 4 + 1;
     let mut ret: Vec<Vec<&str>> = vec![vec![]; cols];
 
     for i in 1..=start.len() {
         let row = start[start.len() - i];
         for (c, buf) in ret.iter_mut().enumerate() {
-            let idx = c * 4;
-            let col = &row[idx..idx + 3];
-            match &col[1..2] {
+            let idx = c * 4 + 1;
+            let col = &row[idx..idx + 1];
+            match col {
                 " " => continue,
                 x => buf.push(x),
             }
@@ -56,10 +56,10 @@ fn execute_instruction(instruction: &str, stacks: &mut [Vec<&str>], multiple: bo
     let n = parsed[0];
     let source = parsed[1] - 1;
     let dest = parsed[2] - 1;
-
     let len = stacks[dest].len();
+
     for _ in 0..n {
-        if let Some(val) = &stacks[source].pop() {
+        if let Some(val) = stacks[source].pop() {
             if multiple {
                 stacks[dest].insert(len, val);
             } else {
@@ -69,7 +69,7 @@ fn execute_instruction(instruction: &str, stacks: &mut [Vec<&str>], multiple: bo
     }
 }
 
-fn execute<'a>(stacks: &mut [Vec<&'a str>], instructions: &Vec<&'a str>, multiple: bool) -> String {
+fn execute(stacks: &mut [Vec<&str>], instructions: &[&str], multiple: bool) -> String {
     for instruction in instructions {
         execute_instruction(instruction, stacks, multiple);
     }

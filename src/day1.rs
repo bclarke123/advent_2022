@@ -45,12 +45,12 @@ pub fn part2() {
 fn test_part1() {
     let test_input: &str = include_str!("input/input_day1_sample.txt");
     let max = tally(test_input, 1);
-    assert!(max == 24000);
+    assert_eq!(max, 24000);
 }
 
 #[test]
 fn test_part2() {
     let test_input: &str = include_str!("input/input_day1_sample.txt");
     let max = tally(test_input, 3);
-    assert!(max == 45000);
+    assert_eq!(max, 45000);
 }

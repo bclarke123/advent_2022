@@ -45,12 +45,12 @@ pub fn part2() {
 fn test_part1() {
     let test_input: &str = include_str!("input/input_day4_sample.txt");
     let areas = test_areas(test_input, contained);
-    assert!(areas == 2);
+    assert_eq!(areas, 2);
 }
 
 #[test]
 fn test_part2() {
     let test_input: &str = include_str!("input/input_day4_sample.txt");
     let areas = test_areas(test_input, overlap);
-    assert!(areas == 4);
+    assert_eq!(areas, 4);
 }

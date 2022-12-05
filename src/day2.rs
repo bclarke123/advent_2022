@@ -75,12 +75,12 @@ pub fn part2() {
 fn test_part1() {
     let test_input: &str = include_str!("input/input_day2_sample.txt");
     let score = tally(test_input, play_p1);
-    assert!(score == 15);
+    assert_eq!(score, 15);
 }
 
 #[test]
 fn test_part2() {
     let test_input: &str = include_str!("input/input_day2_sample.txt");
     let score = tally(test_input, play_p2);
-    assert!(score == 12);
+    assert_eq!(score, 12);
 }

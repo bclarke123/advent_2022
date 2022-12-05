@@ -60,12 +60,12 @@ pub fn part2() {
 fn test_part1() {
     let test_input: &str = include_str!("input/input_day3_sample.txt");
     let result = do_part1(test_input);
-    assert!(result == 157);
+    assert_eq!(result, 157);
 }
 
 #[test]
 fn test_part2() {
     let test_input: &str = include_str!("input/input_day3_sample.txt");
     let result = do_part2(test_input);
-    assert!(result == 70);
+    assert_eq!(result, 70);
 }
