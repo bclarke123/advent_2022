@@ -1,3 +1,4 @@
+use crate::util::*;
 const INPUT: &str = include_str!("input/input_day1.txt");
 
 fn get_carry_amounts(input: &str, buf: &mut Vec<usize>) {
@@ -39,6 +40,13 @@ pub fn part1() {
 pub fn part2() {
     let max = tally(INPUT, 3);
     println!("The top three elves are carrying {}", max);
+}
+
+pub struct Day1;
+impl Day for Day1 {
+    fn get_parts() -> DayFunc {
+        (part1, part2)
+    }
 }
 
 #[test]

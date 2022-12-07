@@ -1,3 +1,4 @@
+use crate::util::*;
 const INPUT: &str = include_str!("input/input_day3.txt");
 
 fn char_val(c: char) -> u32 {
@@ -54,6 +55,13 @@ fn do_part2(input: &str) -> u32 {
 pub fn part2() {
     let result = do_part2(INPUT);
     println!("The team badge is {}", result);
+}
+
+pub struct Day3;
+impl Day for Day3 {
+    fn get_parts() -> DayFunc {
+        (part1, part2)
+    }
 }
 
 #[test]

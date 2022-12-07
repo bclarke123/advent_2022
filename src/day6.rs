@@ -1,3 +1,4 @@
+use crate::util::*;
 const INPUT: &str = include_str!("input/input_day6.txt");
 
 fn uniq(arr: &[char]) -> bool {
@@ -38,6 +39,13 @@ pub fn part1() {
 pub fn part2() {
     let answer = find_start_sequence(INPUT, 14);
     println!("The message appears after reading {} chars", answer);
+}
+
+pub struct Day6;
+impl Day for Day6 {
+    fn get_parts() -> DayFunc {
+        (part1, part2)
+    }
 }
 
 #[test]

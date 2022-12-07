@@ -1,3 +1,4 @@
+use crate::util::*;
 const INPUT: &str = include_str!("input/input_day5.txt");
 
 fn parse_start<'a>(start: &[&'a str]) -> Vec<Vec<&'a str>> {
@@ -90,6 +91,13 @@ pub fn part2() {
     let (mut stacks, instructions) = parse_input(INPUT);
     let ret = execute(&mut stacks, &instructions, true);
     println!("The top crates after rearranging are {}", ret);
+}
+
+pub struct Day5;
+impl Day for Day5 {
+    fn get_parts() -> DayFunc {
+        (part1, part2)
+    }
 }
 
 #[test]

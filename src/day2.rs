@@ -1,3 +1,4 @@
+use crate::util::*;
 const INPUT: &str = include_str!("input/input_day2.txt");
 
 fn play_for_str(s: &str) -> i32 {
@@ -69,6 +70,13 @@ pub fn part1() {
 pub fn part2() {
     let score = tally(INPUT, play_p2);
     println!("Total P2 Rock Paper Scissors score: {}", score);
+}
+
+pub struct Day2;
+impl Day for Day2 {
+    fn get_parts() -> DayFunc {
+        (part1, part2)
+    }
 }
 
 #[test]

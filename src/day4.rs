@@ -1,3 +1,4 @@
+use crate::util::*;
 const INPUT: &str = include_str!("input/input_day4.txt");
 
 fn within(p: u32, a: &[u32]) -> bool {
@@ -39,6 +40,13 @@ pub fn part1() {
 pub fn part2() {
     let areas = test_areas(INPUT, overlap);
     println!("{} areas are partially covered by one elf", areas);
+}
+
+pub struct Day4;
+impl Day for Day4 {
+    fn get_parts() -> DayFunc {
+        (part1, part2)
+    }
 }
 
 #[test]
