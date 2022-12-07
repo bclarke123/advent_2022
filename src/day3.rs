@@ -57,11 +57,8 @@ pub fn part2() {
     println!("The team badge is {}", result);
 }
 
-pub struct Day3;
-impl Day for Day3 {
-    fn get_parts() -> DayFunc {
-        (part1, part2)
-    }
+pub fn get_parts() -> DayFunc {
+    (part1, part2)
 }
 
 #[test]

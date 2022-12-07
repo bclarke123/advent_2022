@@ -42,11 +42,8 @@ pub fn part2() {
     println!("The top three elves are carrying {}", max);
 }
 
-pub struct Day1;
-impl Day for Day1 {
-    fn get_parts() -> DayFunc {
-        (part1, part2)
-    }
+pub fn get_parts() -> DayFunc {
+    (part1, part2)
 }
 
 #[test]

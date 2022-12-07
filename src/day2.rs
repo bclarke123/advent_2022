@@ -72,11 +72,8 @@ pub fn part2() {
     println!("Total P2 Rock Paper Scissors score: {}", score);
 }
 
-pub struct Day2;
-impl Day for Day2 {
-    fn get_parts() -> DayFunc {
-        (part1, part2)
-    }
+pub fn get_parts() -> DayFunc {
+    (part1, part2)
 }
 
 #[test]

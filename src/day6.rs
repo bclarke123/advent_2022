@@ -41,11 +41,8 @@ pub fn part2() {
     println!("The message appears after reading {} chars", answer);
 }
 
-pub struct Day6;
-impl Day for Day6 {
-    fn get_parts() -> DayFunc {
-        (part1, part2)
-    }
+pub fn get_parts() -> DayFunc {
+    (part1, part2)
 }
 
 #[test]

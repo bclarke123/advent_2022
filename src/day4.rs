@@ -42,11 +42,8 @@ pub fn part2() {
     println!("{} areas are partially covered by one elf", areas);
 }
 
-pub struct Day4;
-impl Day for Day4 {
-    fn get_parts() -> DayFunc {
-        (part1, part2)
-    }
+pub fn get_parts() -> DayFunc {
+    (part1, part2)
 }
 
 #[test]

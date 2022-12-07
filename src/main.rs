@@ -1,13 +1,13 @@
-use aoc_2022::{util::*, *};
+use aoc_2022::*;
 
 fn main() {
-    let days: Vec<DayFunc> = vec![
-        day1::Day1::get_parts(),
-        day2::Day2::get_parts(),
-        day3::Day3::get_parts(),
-        day4::Day4::get_parts(),
-        day5::Day5::get_parts(),
-        day6::Day6::get_parts(),
+    let days: Vec<util::DayFunc> = vec![
+        day1::get_parts(),
+        day2::get_parts(),
+        day3::get_parts(),
+        day4::get_parts(),
+        day5::get_parts(),
+        day6::get_parts(),
     ];
 
     for (i, day) in days.into_iter().enumerate() {

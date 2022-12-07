@@ -93,11 +93,8 @@ pub fn part2() {
     println!("The top crates after rearranging are {}", ret);
 }
 
-pub struct Day5;
-impl Day for Day5 {
-    fn get_parts() -> DayFunc {
-        (part1, part2)
-    }
+pub fn get_parts() -> DayFunc {
+    (part1, part2)
 }
 
 #[test]
