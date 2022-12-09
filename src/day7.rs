@@ -40,8 +40,8 @@ impl Fs {
                 self.add_subdir(input);
                 continue;
             }
-            self.add_file(next);
 
+            self.add_file(next);
             input.pop();
         }
     }

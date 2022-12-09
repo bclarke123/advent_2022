@@ -9,6 +9,7 @@ fn main() {
         day5::get_parts(),
         day6::get_parts(),
         day7::get_parts(),
+        day8::get_parts(),
     ];
 
     for (i, day) in days.into_iter().enumerate() {
