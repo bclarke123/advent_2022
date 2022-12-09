@@ -40,21 +40,13 @@ fn walk_steps(input: &str, rope_len: usize) -> usize {
                 let ady = dy.abs();
 
                 if dx.abs() > 1 || dy.abs() > 1 {
-                    let xdir = match dx {
-                        x if x > 0 => 1,
-                        _ => -1,
-                    };
-
-                    let ydir = match dy {
-                        y if y > 0 => 1,
-                        _ => -1,
-                    };
-
                     if adx != 0 {
+                        let xdir = if dx > 0 { 1 } else { -1 };
                         rope[i][0] += xdir;
                     }
 
                     if ady != 0 {
+                        let ydir = if dy > 0 { 1 } else { -1 };
                         rope[i][1] += ydir;
                     }
                 }
