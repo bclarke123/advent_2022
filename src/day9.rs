@@ -16,16 +16,16 @@ fn parse_input(input: &str) -> Vec<(char, i32)> {
 
 fn walk_steps(input: &str, rope_len: usize) -> usize {
     let steps = parse_input(input);
-    let mut rope = vec![(0i32, 0i32); rope_len];
-    let mut buf: Vec<(i32, i32)> = vec![];
+    let mut rope = vec![[0i32; 2]; rope_len];
+    let mut buf: Vec<[i32; 2]> = vec![];
 
     for (dir, amt) in steps {
         for _ in 0..amt {
             match dir {
-                'U' => rope[0].1 += 1,
-                'D' => rope[0].1 -= 1,
-                'L' => rope[0].0 -= 1,
-                'R' => rope[0].0 += 1,
+                'U' => rope[0][1] += 1,
+                'D' => rope[0][1] -= 1,
+                'L' => rope[0][0] -= 1,
+                'R' => rope[0][0] += 1,
                 _ => panic!("Bad input"),
             }
 
@@ -33,10 +33,10 @@ fn walk_steps(input: &str, rope_len: usize) -> usize {
                 let prev = rope[i - 1];
                 let curr = rope[i];
 
-                let dx = prev.0 - curr.0;
+                let dx = prev[0] - curr[0];
                 let adx = dx.abs();
 
-                let dy = prev.1 - curr.1;
+                let dy = prev[1] - curr[1];
                 let ady = dy.abs();
 
                 if dx.abs() > 1 || dy.abs() > 1 {
@@ -51,19 +51,18 @@ fn walk_steps(input: &str, rope_len: usize) -> usize {
                     };
 
                     if adx != 0 {
-                        rope[i].0 += xdir;
+                        rope[i][0] += xdir;
                     }
 
                     if ady != 0 {
-                        rope[i].1 += ydir;
+                        rope[i][1] += ydir;
                     }
                 }
             }
 
             let tail = rope[rope_len - 1];
-
             if !buf.contains(&tail) {
-                buf.push(tail.clone());
+                buf.push(tail);
             }
         }
     }
