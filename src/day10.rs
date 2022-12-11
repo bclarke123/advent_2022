@@ -60,53 +60,53 @@ impl Display {
     fn move_sprite(&mut self, amt: i32) {
         self.sprite += amt;
     }
-}
 
-fn get_pattern(display: Display, buf: &mut Vec<String>) {
-    display
-        .pixels
-        .chunks(40)
-        .map(|r| r.iter().map(|b| if *b { '#' } else { '.' }))
-        .for_each(|r| buf.push(String::from_iter(r)));
-}
+    fn execute_instructions(&mut self, instructions: &Vec<Instruction>) {
+        for instr in instructions {
+            self.tick();
+            match instr {
+                Instruction::AddX(n) => {
+                    self.tick();
+                    self.move_sprite(*n);
+                }
+                Instruction::Noop => {}
+            }
+        }
+    }
 
-fn draw_pattern(display: Display) {
-    let mut buf = vec![];
-    get_pattern(display, &mut buf);
-    println!("{}", buf.join("\n"));
+    fn get_pattern(&self, buf: &mut Vec<String>) {
+        self.pixels
+            .chunks(40)
+            .map(|r| r.iter().map(|b| if *b { '#' } else { '.' }))
+            .for_each(|r| buf.push(String::from_iter(r)));
+    }
+
+    fn draw_pattern(&self) {
+        let mut buf = vec![];
+        self.get_pattern(&mut buf);
+        println!("{}", buf.join("\n"));
+    }
 }
 
 fn parse_input(input: &str) -> Vec<Instruction> {
     input.lines().map(Instruction::parse).collect::<Vec<_>>()
 }
 
-fn execute_instructions(display: &mut Display, instructions: &Vec<Instruction>) {
-    for instr in instructions {
-        display.tick();
-        match instr {
-            Instruction::AddX(n) => {
-                display.tick();
-                display.move_sprite(*n);
-            }
-            Instruction::Noop => {}
-        }
-    }
-}
-
 fn part1() {
     let instructions = parse_input(INPUT);
     let mut display = Display::new();
-    execute_instructions(&mut display, &instructions);
-    let answer = display.signal_strength;
+    display.execute_instructions(&instructions);
 
+    let answer = display.signal_strength;
     println!("The signal strength sum is {}", answer);
 }
 
 fn part2() {
     let instructions = parse_input(INPUT);
     let mut display = Display::new();
-    execute_instructions(&mut display, &instructions);
-    draw_pattern(display);
+
+    display.execute_instructions(&instructions);
+    display.draw_pattern();
 }
 
 pub fn get_parts() -> DayFunc {
@@ -118,7 +118,8 @@ fn test_part1() {
     let input: &str = include_str!("input/input_day10_sample.txt");
     let instructions = parse_input(input);
     let mut display = Display::new();
-    execute_instructions(&mut display, &instructions);
+
+    display.execute_instructions(&instructions);
     let answer = display.signal_strength;
 
     assert_eq!(answer, 13140);
@@ -131,8 +132,8 @@ fn test_part2() {
     let mut display = Display::new();
     let mut buf = vec![];
 
-    execute_instructions(&mut display, &instructions);
-    get_pattern(display, &mut buf);
+    display.execute_instructions(&instructions);
+    display.get_pattern(&mut buf);
 
     let test_data: [&str; 6] = [
         "##..##..##..##..##..##..##..##..##..##..",
