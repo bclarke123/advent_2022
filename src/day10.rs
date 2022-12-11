@@ -39,10 +39,11 @@ impl Display {
     fn tick(&mut self) {
         let pixel = (self.cursor % 40) - self.sprite;
         let cursor_index: usize = self.cursor.try_into().unwrap();
-        let lit = pixel >= -1 && pixel <= 1;
+        let lit = (-1..=1).contains(&pixel);
         self.pixels[cursor_index] = lit;
         self.cursor += 1;
     }
+
     fn move_sprite(&mut self, amt: i32) {
         self.sprite += amt;
     }
@@ -53,9 +54,7 @@ fn get_pattern(display: Display, buf: &mut Vec<String>) {
         .pixels
         .chunks(40)
         .map(|r| r.iter().map(|b| if *b { '#' } else { '.' }))
-        .for_each(|r| {
-            buf.push(String::from_iter(r));
-        });
+        .for_each(|r| buf.push(String::from_iter(r)));
 }
 
 fn draw_pattern(display: Display) {
@@ -65,10 +64,7 @@ fn draw_pattern(display: Display) {
 }
 
 fn parse_input(input: &str) -> Vec<Instruction> {
-    input
-        .lines()
-        .map(|l| Instruction::parse(l))
-        .collect::<Vec<_>>()
+    input.lines().map(Instruction::parse).collect::<Vec<_>>()
 }
 
 fn check_output(cycle: i32, x: i32) -> i32 {
@@ -102,16 +98,16 @@ fn execute_instructions(display: &mut Display, instructions: &Vec<Instruction>) 
 }
 
 fn part1() {
-    let mut display = Display::new();
     let instructions = parse_input(INPUT);
+    let mut display = Display::new();
     let answer = execute_instructions(&mut display, &instructions);
 
     println!("The signal strength sum is {}", answer);
 }
 
 fn part2() {
-    let mut display = Display::new();
     let instructions = parse_input(INPUT);
+    let mut display = Display::new();
     execute_instructions(&mut display, &instructions);
     draw_pattern(display);
 }
