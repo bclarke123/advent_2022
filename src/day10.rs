@@ -95,10 +95,9 @@ fn parse_input(input: &str) -> Vec<Instruction> {
 fn part1() {
     let instructions = parse_input(INPUT);
     let mut display = Display::new();
-    display.execute_instructions(&instructions);
 
-    let answer = display.signal_strength;
-    println!("The signal strength sum is {}", answer);
+    display.execute_instructions(&instructions);
+    println!("The signal strength sum is {}", display.signal_strength);
 }
 
 fn part2() {
