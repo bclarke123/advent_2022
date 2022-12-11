@@ -25,6 +25,7 @@ struct Display {
     pixels: Vec<bool>,
     sprite: i32,
     cursor: i32,
+    signal_strength: i32,
 }
 
 impl Display {
@@ -33,6 +34,15 @@ impl Display {
             pixels: vec![false; 240],
             sprite: 1,
             cursor: 0,
+            signal_strength: 0,
+        }
+    }
+
+    fn check_signal(&self) -> i32 {
+        if self.cursor % 40 == 20 {
+            self.cursor * self.sprite
+        } else {
+            0
         }
     }
 
@@ -40,8 +50,11 @@ impl Display {
         let pixel = (self.cursor % 40) - self.sprite;
         let cursor_index: usize = self.cursor.try_into().unwrap();
         let lit = (-1..=1).contains(&pixel);
+
         self.pixels[cursor_index] = lit;
         self.cursor += 1;
+
+        self.signal_strength += self.check_signal();
     }
 
     fn move_sprite(&mut self, amt: i32) {
@@ -67,40 +80,24 @@ fn parse_input(input: &str) -> Vec<Instruction> {
     input.lines().map(Instruction::parse).collect::<Vec<_>>()
 }
 
-fn check_output(cycle: i32, x: i32) -> i32 {
-    if cycle % 40 == 20 {
-        cycle * x
-    } else {
-        0
-    }
-}
-
-fn execute_instructions(display: &mut Display, instructions: &Vec<Instruction>) -> i32 {
-    let mut ret = 0;
-
+fn execute_instructions(display: &mut Display, instructions: &Vec<Instruction>) {
     for instr in instructions {
+        display.tick();
         match instr {
-            Instruction::Noop => {
-                display.tick();
-                ret += check_output(display.cursor, display.sprite);
-            }
             Instruction::AddX(n) => {
                 display.tick();
-                ret += check_output(display.cursor, display.sprite);
-                display.tick();
-                ret += check_output(display.cursor, display.sprite);
                 display.move_sprite(*n);
             }
+            Instruction::Noop => {}
         }
     }
-
-    ret
 }
 
 fn part1() {
     let instructions = parse_input(INPUT);
     let mut display = Display::new();
-    let answer = execute_instructions(&mut display, &instructions);
+    execute_instructions(&mut display, &instructions);
+    let answer = display.signal_strength;
 
     println!("The signal strength sum is {}", answer);
 }
@@ -121,7 +118,9 @@ fn test_part1() {
     let input: &str = include_str!("input/input_day10_sample.txt");
     let instructions = parse_input(input);
     let mut display = Display::new();
-    let answer = execute_instructions(&mut display, &instructions);
+    execute_instructions(&mut display, &instructions);
+    let answer = display.signal_strength;
+
     assert_eq!(answer, 13140);
 }
 
